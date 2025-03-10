@@ -110,9 +110,17 @@ export default {
     </div>
   </section>
   <div class="flex h-screen gap-4">
-    <div v-if="clicked == true" class="w-1/4 h-1/2">
+    <div v-if="clicked == true" class="w-1/4 h-full">
     <Card bg="bg-slate-200">
       <h1><strong>Farmer details</strong></h1><br>
+      <h1>First Name: </h1>
+      <div class="bg-white border rounded w-full py-2 px-3 mb-2">        
+        <h1>{{ jsonData['FirstName'] }}</h1>
+      </div><br>
+      <h1>Surname: </h1>
+      <div class="bg-white border rounded w-full py-2 px-3 mb-2">        
+        <h1>{{ jsonData['Surname'] }}</h1>
+      </div><br>
       <h1>Address: </h1>
       <div class="bg-white border rounded w-full py-2 px-3 mb-2">        
         <h1>{{ jsonData['PhysicalAddress'] }}</h1>
@@ -131,6 +139,11 @@ export default {
         <h1>Name: {{ farmJsonData['FarmName'] }}</h1>
         <h1>Size (ha): {{ farmJsonData['LandSize'] }}</h1>
         <h1>Coordinates: {{ farmJsonData['CoordinatesLat'] }}</h1>
+      </div><br>
+      <div class="grid grid-cols-3 gap-3">
+        <h1>District: {{ farmJsonData['District'] }}</h1>
+        <h1>Arable Land Size (ha): {{ farmJsonData['ArableLandSize'] }}</h1>
+        <h1>Land Ownership: {{ farmJsonData['LandOwnership'] }}</h1>
       </div>
     </Card>
     </div>
