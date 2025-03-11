@@ -33,6 +33,7 @@ export default {
         }
       }
       axios.get(this.dashboardURL, request).then((response)=>{
+        console.log(response)
         this.jsonData = response.data[0]
       })
     },
@@ -108,9 +109,9 @@ export default {
       <Card>
         <h1><strong>Crop Details</strong></h1>
         <div class="grid grid-cols-3 gap-3">
-          <h1>Crop Name</h1>
-          <h1>Season</h1>
-          <h1>Certificate ID</h1>
+          <h1>Crop Name: {{ jsonData['FarmerFacilityDetails']['Crop']['CropName'] }}</h1>
+          <h1>Season: {{ jsonData['FarmerFacilityDetails']['Crop']['Season'] }}</h1>
+          <h1>Certificate ID: {{ jsonData['FarmerFacilityDetails']['Crop']['CertificateID'] }}</h1>
         </div>
       </Card>
     </div>

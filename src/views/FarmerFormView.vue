@@ -150,16 +150,16 @@ input[type=number] {
 
                     <!-- 8th row -->
                     <div class="mb-4 grid grid-cols-2 gap-2">
-                        <input type="text" v-model="form.nextofkinnationalid" id="nextOfKinNationalid"
+                        <input type="number" v-model="form.nextofkinnationalid" id="nextOfKinNationalid"
                             name="nextOfKinNationalid" class="border rounded w-full py-2 px-3 mb-2"
                             placeholder="Next of kin national ID" required>
-                        <input type="text" v-model="form.farmid" id="farmid" name="farmid"
+                        <input type="number" v-model="form.farmid" id="farmid" name="farmid"
                             class="border rounded w-full py-2 px-3 mb-2" placeholder="Farm ID" required>
                     </div>
 
                     <!-- 9th row -->
                     <div class="mb-4 grid grid-cols-2 gap-2">
-                        <input type="text" v-model="form.farmerid" id="farmerid" name="farmerid"
+                        <input type="number" v-model="form.farmerid" id="farmerid" name="farmerid"
                             class="border rounded w-full py-2 px-3 mb-2" placeholder="Farmer ID" required>
                         <input type="text" v-model="form.commodityid" id="commodityid" name="commodityid"
                             class="border rounded w-full py-2 px-3 mb-2" placeholder="Commodity ID" required>
