@@ -4,19 +4,7 @@ import Hero from '@/components/Hero.vue'
 import Card from '@/components/Card.vue'
 import axios from 'axios'
 import { reactive } from 'vue'
-// import { onMounted } from 'vue'
 
-// const url = 
-// var data = null
-
-// onMounted(() => {    
-//     axios.get(url).then((response)=>{
-//       data = response.data
-//       console.log(response.data)
-//     }).catch((error)=>{
-//       console.log(error)
-//     })
-// })
 
 export default {
   components: {
@@ -32,34 +20,11 @@ export default {
       }),
       clicked: false,
       jsonData: {},
-      farmJsonData: {},
-      farmersURL: 'http://localhost:5000/api/farmers',
-      farmerURL: 'http://localhost:5000/api/farmer',
-      farmURL: 'http://localhost:5000/api/farmer-facility-details',
-      farmID: null,
+      dashboardURL: 'http://localhost:5000/api/farmer-dashboard'
     }
   },
 
   methods: {
-    async searchFarm() {
-      if (this.farmID != null) {
-        const request = {
-          params: {
-            FarmID: this.farmID
-          }
-        }
-
-        await axios.get(this.farmURL, request).then((response) => {
-          console.log('Farm details:')
-          console.log(response.data.data[0])
-          this.farmJsonData = response.data.data[0]
-        })
-          .catch((error) => {
-            console.log(error)
-          })
-      }
-    },
-
     async search() {
       this.clicked = true
       const request = {
@@ -67,26 +32,19 @@ export default {
           FirstName: this.form.FirstName
         }
       }
-      await axios.get(this.farmerURL, request).then((response) => {
-        console.log('Farmer details')
-        console.log(response.data[0])
-        this.farmID = response.data[0]['FarmID']
-        this.searchFarm()
+      axios.get(this.dashboardURL, request).then((response)=>{
+        this.jsonData = response.data[0]
       })
-        .catch((error) => {
-          console.log(error)
-        })
     },
+
+    clear() {
+      this.clicked = false
+      this.form.FirstName = null
+      this.jsonData = {}
+    }
   },
 
-  mounted() {
-    axios.get(this.farmersURL).then((response) => {
-      this.jsonData = response.data[0]
-      // console.log(response.data)
-    }).catch((error) => {
-      console.log(error)
-    })
-  }
+  
 }
 </script>
 
@@ -109,8 +67,8 @@ export default {
         type="submit">Clear</button>
     </div>
   </section>
-  <div class="flex h-screen gap-4">
-    <div v-if="clicked == true" class="w-1/4 h-full">
+  <div v-if="clicked == true" class="flex h-3/4 gap-4">
+    <div class="w-1/4 h-full">
     <Card bg="bg-slate-200">
       <h1><strong>Farmer details</strong></h1><br>
       <h1>First Name: </h1>
@@ -132,20 +90,30 @@ export default {
     </Card>
   </div>
   <div class="flex flex-col w-3/4 h-full space-y-4">
-    <div v-if="clicked == true" class="h-1/3">
+    <div v-if="this.jsonData['FarmerFacilityDetails']!=null" class="h-1/3">
       <Card>
       <h1><strong>Farm details</strong></h1>
       <div class="grid grid-cols-3 gap-3">
-        <h1>Name: {{ farmJsonData['FarmName'] }}</h1>
-        <h1>Size (ha): {{ farmJsonData['LandSize'] }}</h1>
-        <h1>Coordinates: {{ farmJsonData['CoordinatesLat'] }}</h1>
+        <h1>Name: {{ jsonData['FarmerFacilityDetails']['FarmName'] }}</h1>
+        <h1>Land Size (ha): {{ jsonData['FarmerFacilityDetails']['LandSize'] }}</h1>
+        <h1>Physical Address: {{ jsonData['FarmerFacilityDetails']['PhysicalAddress'] }}</h1>
       </div><br>
       <div class="grid grid-cols-3 gap-3">
-        <h1>District: {{ farmJsonData['District'] }}</h1>
-        <h1>Arable Land Size (ha): {{ farmJsonData['ArableLandSize'] }}</h1>
-        <h1>Land Ownership: {{ farmJsonData['LandOwnership'] }}</h1>
+        <h1>District: {{ jsonData['FarmerFacilityDetails']['District'] }}</h1>
+        <h1>Arable Land Size (ha): {{ jsonData['FarmerFacilityDetails']['ArableLandSize'] }}</h1>
+        <h1>Land Type: {{ jsonData['FarmerFacilityDetails']['LandType'] }}</h1>
       </div>
     </Card>
+    <div class="mt-10 h-1/3">
+      <Card>
+        <h1><strong>Crop Details</strong></h1>
+        <div class="grid grid-cols-3 gap-3">
+          <h1>Crop Name</h1>
+          <h1>Season</h1>
+          <h1>Certificate ID</h1>
+        </div>
+      </Card>
+    </div>
     </div>
   </div>
   </div>

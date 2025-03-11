@@ -3,6 +3,7 @@ import HomeView from '@/views/HomeView.vue'
 import FarmerProfileView from '@/views/FarmerProfileView.vue'
 import FarmView from '@/views/FarmView.vue'
 import CropManagementView from '@/views/CropManagementView.vue'
+import FarmerFormView from '@/views/FarmerFormView.vue'
 
 const router = createRouter({
     history: createWebHistory(import.meta.env.BASE_URL),
@@ -26,7 +27,12 @@ const router = createRouter({
             path: '/crop-management',
             name: 'crop-management',
             component: CropManagementView
-        }
+        },
+        {
+            path: '/farmer-form',
+            name: 'farmer-form',
+            component: FarmerFormView
+        },
     ]
 })
 

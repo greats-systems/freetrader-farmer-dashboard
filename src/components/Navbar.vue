@@ -7,9 +7,9 @@ import { RouterLink } from 'vue-router'
     <div class="menu-item">
       <RouterLink to="/">Home</RouterLink>
     </div>
-    <!-- <div class="menu-item">
-      <RouterLink to="farmer-profile">Farmer Profile</RouterLink>
-    </div> -->
+    <div class="menu-item">
+      <RouterLink to="farmer-form">Register Farmer</RouterLink>
+    </div>
     <div class="menu-item">
       <RouterLink to="farm">Farm Overview</RouterLink>
     </div>
